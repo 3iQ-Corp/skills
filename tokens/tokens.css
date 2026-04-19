@@ -1,65 +1,159 @@
 /* 3iQ design tokens — CSS custom properties.
-   Import into any web/email template:
+   Source: derived from 3iq.io (April 2026). Keep in sync with tokens.yaml/json.
+
+   Usage:
      <link rel="stylesheet" href="path/to/tokens.css">
-   or copy :root values into an inlined <style> block for email. */
+   or copy the :root block into an inlined <style> for email.
+
+   Then use values via var(), e.g.:
+     background: var(--bg);
+     color:      var(--text);
+     font-family: var(--font-primary);
+
+   Theme is applied via a class: add data-theme="dark" (default) or
+   data-theme="light" on a wrapper. Fund theme via data-fund-theme="etf"
+   etc. to swap gradient + accent. */
 
 :root {
-  /* Color — core palette */
-  --color-navy:     #080E23;
-  --color-green:    #4C9478;
-  --color-gold:     #EDC576;
-  --color-offwhite: #FDFCFA;
+  /* ─── PRIMITIVE COLOR SWATCHES ─────────────────────────────────────── */
+  --swatch-dark:            #080E23;
+  --swatch-dark-secondary:  #4C3D32;
+  --swatch-light:           #FDFCFA;
+  --swatch-light-secondary: #F4ECE5;
+  --swatch-light-tertiary:  #F8F7F5;
+  --swatch-neutral:         #DDDDDD;
+  --swatch-transparent:     #FFFFFF00;
 
-  /* Color — semantic roles */
-  --bg-primary:     #080E23;
-  --bg-paper:       #FDFCFA;
-  --text-on-dark:   #FDFCFA;
-  --text-on-light:  #080E23;
-  --cta:            #4C9478;
-  --accent:         #EDC576;
-  --rule:           #EDC576;
+  --swatch-brand:    #D6D5BF; /* sand */
+  --swatch-brand-2:  #C9D7D7; /* sky  */
+  --swatch-brand-3:  #EAE9DD; /* cream*/
+  --swatch-brand-4:  #B8C6C6; /* sage */
 
-  /* Typography */
-  --font-heading: "Denton Variable Test", "Times New Roman", serif;
-  --font-body:    "Funnel Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --swatch-green:   #4C9478;
+  --swatch-yellow:  #EDC576;  /* aka "gold" */
+  --swatch-orange:  #E6704E;
 
-  --fs-eyebrow: 12px;
-  --fs-caption: 14px;
-  --fs-body:    16px;
-  --fs-lead:    18px;
-  --fs-h4:      22px;
-  --fs-h3:      28px;
-  --fs-h2:      40px;
-  --fs-h1:      56px;
-  --fs-display: 72px;
+  --swatch-alert-negative: #DA3B3B;
+  --swatch-alert-positive: #4C9478;
 
+  /* ─── TYPOGRAPHY ───────────────────────────────────────────────────── */
+  --font-primary:   "Neue Haas Grotesk Display", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-secondary: Denton, "Palatino Linotype", Georgia, serif;
+
+  /* Role-to-family alias */
+  --font-heading: var(--font-secondary);
+  --font-body:    var(--font-primary);
+
+  /* Scale (rem) — desktop targets; clamp yourself for mobile if needed */
+  --fs-display:    7rem;
+  --fs-h1:         5rem;
+  --fs-h2:         4rem;
+  --fs-h3:         3rem;
+  --fs-h4:         2.5rem;
+  --fs-h5:         2rem;
+  --fs-h6:         1.5rem;
+  --fs-text-large: 1.25rem;
+  --fs-text-main:  1rem;
+  --fs-text-small: 0.875rem;
+
+  --fw-light:    300;
   --fw-regular:  400;
   --fw-medium:   500;
   --fw-semibold: 600;
-  --fw-bold:     700;
 
-  --lh-tight:  1.1;
-  --lh-snug:   1.25;
-  --lh-normal: 1.5;
+  --lh-tight:   1em;
+  --lh-snug:    1.1em;
+  --lh-normal:  1.25em;
+  --lh-relaxed: 1.5em;
 
-  /* Spacing (4px grid) */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --sp-7: 48px;
-  --sp-8: 64px;
-  --sp-9: 96px;
+  --ls-normal:  0em;
+  --ls-heading: 0.01em;
+  --ls-wide:    0.04em;
 
-  /* Radius */
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   16px;
-  --radius-pill: 999px;
+  /* ─── SIZE / SPACING ───────────────────────────────────────────────── */
+  --sp-0:     0rem;
+  --sp-0-125: 0.125rem;
+  --sp-0-25:  0.25rem;
+  --sp-0-5:   0.5rem;
+  --sp-0-75:  0.75rem;
+  --sp-1:     1rem;
+  --sp-1-25:  1.25rem;
+  --sp-1-5:   1.5rem;
+  --sp-2:     2rem;
+  --sp-2-5:   2.5rem;
+  --sp-3:     3rem;
+  --sp-3-5:   3.5rem;
+  --sp-4:     4rem;
+  --sp-5:     5rem;
+  --sp-6:     6rem;
+  --sp-7:     7rem;
+  --sp-8:     8rem;
+  --sp-10:    10rem;
+  --sp-12:    12rem;
+  --sp-15:    15rem;
 
-  /* Shadow */
-  --shadow-card: 0 4px 16px rgba(8, 14, 35, 0.12);
-  --shadow-pop:  0 12px 32px rgba(8, 14, 35, 0.24);
+  /* ─── RADIUS & BORDER ─────────────────────────────────────────────── */
+  --radius-x-small: 0.25rem;
+  --radius-small:   0.375rem;
+  --radius-main:    1rem;
+  --radius-round:   100vw;     /* pill */
+
+  --border-width-main:  1px;
+  --border-width-large: 2px;
+
+  /* ─── GRADIENTS ───────────────────────────────────────────────────── */
+  --gradient-forge:   linear-gradient(180deg, #080E23, #4C3D32);
+  --gradient-growth:  linear-gradient(180deg, #1E3239, #02393C);
+  --gradient-warmth:  linear-gradient(180deg, #1C0E1D, #3A1717);
+
+  --gradient-card-sand:  linear-gradient(180deg, #D6D5BF, #F8F7F5);
+  --gradient-card-sky:   linear-gradient(180deg, #C9D7D7, #F4ECE5);
+  --gradient-card-cream: linear-gradient(180deg, #EAE9DD, #FDFCFA);
+  --gradient-card-sage:  linear-gradient(180deg, #B8C6C6, #F8F7F5);
+
+  --gradient-button-dark: linear-gradient(to right, #FDFCFA 15%, #D6D5BF 100%);
+  --gradient-dark-fade-right: linear-gradient(90deg, #080E23, #080E231A 65%);
+}
+
+/* ─── SEMANTIC ROLES — default (dark) theme ─────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg:         var(--swatch-dark);
+  --surface:    var(--swatch-dark-secondary);
+  --text:       var(--swatch-light);
+  --text-muted: var(--swatch-brand);
+  --border:     var(--swatch-light);
+  --cta-bg:     transparent;            /* use --gradient-button-dark for fill */
+  --cta-text:   var(--swatch-dark);
+  --accent:     var(--swatch-yellow);
+  --rule:       var(--swatch-yellow);
+  --bg-gradient: var(--gradient-forge); /* default hero background */
+}
+
+/* Light theme for paper / docs / long-form */
+[data-theme="light"] {
+  --bg:         var(--swatch-light);
+  --surface:    var(--swatch-light-tertiary);
+  --text:       var(--swatch-dark);
+  --text-muted: var(--swatch-dark-secondary);
+  --border:     var(--swatch-dark);
+  --cta-bg:     var(--swatch-brand);
+  --cta-text:   var(--swatch-dark);
+  --accent:     var(--swatch-yellow);
+  --rule:       var(--swatch-dark);
+  --bg-gradient: none;
+}
+
+/* Fund-theme overlays — apply to dark backgrounds */
+[data-fund-theme="etf"] {
+  --bg-gradient: var(--gradient-forge);
+  --accent:      var(--swatch-yellow);
+}
+[data-fund-theme="cef"] {
+  --bg-gradient: var(--gradient-growth);
+  --accent:      var(--swatch-green);
+}
+[data-fund-theme="multi-crypto"] {
+  --bg-gradient: var(--gradient-warmth);
+  --accent:      var(--swatch-orange);
 }
