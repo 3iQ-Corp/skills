@@ -49,14 +49,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: var(--sp-1);
-      color: var(--text);               /* drives .base stroke/fill */
     }
-    /* Two-layer stand-in icon styling: .base inherits currentColor (white on
-       forge), .accent picks up --accent (yellow/green/orange per fund theme). */
-    .feature .icon .base   { stroke: currentColor; fill: none; }
-    .feature .icon .accent { stroke: var(--accent);  fill: none; }
-    .feature .icon .dot    { fill: var(--accent); stroke: none; }
-    .feature .icon svg     { overflow: visible; }
     .feature h3 {
       font-family: var(--font-body);
       font-weight: 700;
@@ -118,14 +111,14 @@
           <article class="feature">
             <div class="icon" aria-hidden="true">
               <!-- stand-in icon: constellation -->
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <path class="base"   stroke-width="1" d="M12 60L36 44L24 24M36 44L64 20M36 44L52 58"/>
-                <path class="accent" stroke-width="1" d="M36 44L52 58L64 20"/>
-                <circle class="dot" cx="12" cy="60" r="2"/>
-                <circle class="dot" cx="64" cy="20" r="2"/>
-                <circle class="dot" cx="36" cy="44" r="2"/>
-                <circle class="dot" cx="52" cy="58" r="2"/>
-                <circle class="dot" cx="24" cy="24" r="2"/>
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="12" cy="60" r="2" fill="#EDC576"/>
+                <circle cx="36" cy="44" r="2" fill="#FDFCFA"/>
+                <circle cx="64" cy="20" r="2" fill="#EDC576"/>
+                <circle cx="52" cy="58" r="2" fill="#FDFCFA"/>
+                <circle cx="24" cy="24" r="2" fill="#FDFCFA"/>
+                <path d="M12 60L36 44L24 24M36 44L64 20M36 44L52 58" stroke="#FDFCFA" stroke-width="1"/>
+                <path d="M36 44L52 58L64 20" stroke="#EDC576" stroke-width="1"/>
               </svg>
             </div>
             <h3>Pioneering innovation</h3>
@@ -134,14 +127,14 @@
 
           <article class="feature">
             <div class="icon" aria-hidden="true">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <g class="base" stroke-width="1">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <g stroke="#FDFCFA" stroke-width="1">
                   <path d="M16 24L32 40L16 56"/>
                   <path d="M40 24L56 40L40 56"/>
                   <path d="M32 40L48 40"/>
                 </g>
-                <path class="accent" stroke-width="1" d="M40 24L56 40L40 56L48 40Z"/>
-                <g class="dot">
+                <path d="M40 24L56 40L40 56L48 40Z" stroke="#EDC576" stroke-width="1"/>
+                <g fill="#EDC576">
                   <circle cx="16" cy="24" r="1.5"/>
                   <circle cx="32" cy="40" r="1.5"/>
                   <circle cx="16" cy="56" r="1.5"/>
@@ -157,10 +150,10 @@
 
           <article class="feature">
             <div class="icon" aria-hidden="true">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <rect class="accent" stroke-width="1" x="32" y="32" width="16" height="16"/>
-                <path class="base"   stroke-width="1" d="M16 40L40 16L64 40L40 64Z"/>
-                <g class="dot">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <rect x="32" y="32" width="16" height="16" stroke="#EDC576" stroke-width="1"/>
+                <path d="M16 40L40 16L64 40L40 64Z" stroke="#FDFCFA" stroke-width="1"/>
+                <g fill="#EDC576">
                   <circle cx="16" cy="40" r="1.5"/>
                   <circle cx="40" cy="16" r="1.5"/>
                   <circle cx="64" cy="40" r="1.5"/>
@@ -178,12 +171,12 @@
 
           <article class="feature">
             <div class="icon" aria-hidden="true">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle class="base"   stroke-width="1" cx="24" cy="24" r="10"/>
-                <rect   class="accent" stroke-width="1" x="44" y="14" width="20" height="20"/>
-                <rect   class="base"   stroke-width="1" x="14" y="46" width="20" height="20"/>
-                <path   class="base"   stroke-width="1" d="M44 66L54 46L64 66Z"/>
-                <g class="dot">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="24" cy="24" r="10" stroke="#FDFCFA" stroke-width="1"/>
+                <rect x="44" y="14" width="20" height="20" stroke="#EDC576" stroke-width="1"/>
+                <rect x="14" y="46" width="20" height="20" stroke="#FDFCFA" stroke-width="1"/>
+                <path d="M44 66L54 46L64 66Z" stroke="#FDFCFA" stroke-width="1"/>
+                <g fill="#EDC576">
                   <circle cx="24" cy="14" r="1.5"/>
                   <circle cx="34" cy="24" r="1.5"/>
                   <circle cx="44" cy="14" r="1.5"/>

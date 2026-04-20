@@ -1,0 +1,108 @@
+/* Preview card shared styles — used by every card in /preview.
+   Each card is ~700px wide, variable height. No titles (the asset name
+   renders outside), just the token specimens. */
+@import url("../tokens/tokens.css");
+
+@font-face {
+  font-family: "Denton";
+  src: url("../fonts/Denton-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../fonts/NeueHaasDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../fonts/NeueHaasDisplay-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+  font-weight: 500 700;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  color: var(--swatch-dark);
+  background: var(--swatch-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  width: 700px;
+  padding: 28px 32px;
+  display: grid;
+  gap: 16px;
+  background: var(--swatch-light);
+  color: var(--swatch-dark);
+}
+.card.on-dark {
+  background: var(--swatch-dark);
+  color: var(--swatch-light);
+}
+.card.on-forge  { background: var(--gradient-forge);  color: var(--swatch-light); }
+.card.on-growth { background: var(--gradient-growth); color: var(--swatch-light); }
+.card.on-warmth { background: var(--gradient-warmth); color: var(--swatch-light); }
+
+.row { display: flex; gap: 12px; align-items: stretch; }
+.col { display: flex; flex-direction: column; gap: 6px; }
+
+.label {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: currentColor;
+  opacity: 0.55;
+  font-weight: 500;
+}
+.value {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.swatch {
+  width: 100%;
+  height: 72px;
+  border-radius: 6px;
+  border: 1px solid rgb(8 14 35 / 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.on-dark .swatch, .on-forge .swatch, .on-growth .swatch, .on-warmth .swatch {
+  border-color: rgb(253 252 250 / 0.12);
+}
+
+.specimen {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1em;
+}
+
+.eyebrow {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--swatch-yellow);
+  margin: 0;
+}
+.rule { height: 2px; width: 48px; background: currentColor; }

@@ -1,0 +1,211 @@
+/* 3iQ — Colors & Type
+   Canonical CSS for consumers of the design system. Imports the authoritative
+   token set from tokens/tokens.css, then layers semantic aliases (fg1 / fg2,
+   serif-display, h1, p …) on top.
+
+   Values are the single source of truth. DO NOT re-declare colors or sizes
+   here — edit tokens/tokens.yaml (+ .json + .css) to change brand decisions.
+*/
+
+@import url("./tokens/tokens.css");
+
+/* ─── Real licensed brand fonts (pulled from live 3iq.io Webflow CDN
+   and saved to /fonts). ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Denton";
+  src: url("./fonts/Denton-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("./fonts/NeueHaasDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("./fonts/NeueHaasDisplay-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("./fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+  font-weight: 500 700;  /* Medium covers the 600/700 used in feature titles */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Semantic COLOR aliases ────────────────────────────────────────── */
+:root {
+  /* Foreground (use in place of direct swatches in templates) */
+  --fg1:        var(--text);           /* primary text      */
+  --fg2:        var(--text-muted);     /* secondary / caption */
+  --fg-inverse: var(--swatch-dark);    /* text on light CTAs */
+
+  /* Background */
+  --bg1:        var(--bg);             /* primary page bg  */
+  --bg2:        var(--surface);        /* secondary surface */
+  --bg-hero:    var(--bg-gradient);    /* forge/growth/warmth per data-fund-theme */
+
+  /* Borders */
+  --hairline:        var(--border-muted);
+  --hairline-strong: var(--border);
+
+  /* Accent + status (already in tokens.css but re-exported for clarity) */
+  --accent-yellow: var(--swatch-yellow);
+  --accent-green:  var(--swatch-green);
+  --accent-orange: var(--swatch-orange);
+  --alert-neg:     var(--swatch-alert-negative);
+  --alert-pos:     var(--swatch-alert-positive);
+
+  /* Families */
+  --serif-display: var(--font-secondary);   /* Denton Light  */
+  --sans:          var(--font-primary);     /* Neue Haas     */
+  --mono:          ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+/* ─── Semantic TYPE classes ─────────────────────────────────────────── */
+.display {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+.h1, h1.brand {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+.h2, h2.brand {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+.h3, h3.brand {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+.h4, h4.brand {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+.h5, h5.brand {
+  font-family: var(--serif-display);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-h5);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+/* H6 is sans — matches site's use for feature / card titles */
+.h6, h6.brand {
+  font-family: var(--sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h6);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-normal);
+  margin: 0;
+}
+
+.p, p.brand {
+  font-family: var(--sans);
+  font-weight: var(--fw-medium);        /* site body weight is 500 */
+  font-size: var(--fs-text-main);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+  max-width: 60ch;
+}
+.p-large {
+  font-family: var(--sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-text-large);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+  max-width: 56ch;
+}
+.p-small,
+.caption {
+  font-family: var(--sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-text-small);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+  color: var(--fg2);
+}
+
+/* Eyebrow — short all-caps label above headlines. Always accent-coloured. */
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-text-small);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--accent);
+  margin: 0;
+}
+
+/* Ticker badge — 2-letter ETF/CEF code with accent underline */
+.ticker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-family: var(--sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-text-small);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 2px;
+}
+
+/* Inline code — rarely used in marketing copy, here for docs */
+code, .code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-x-small);
+  background: rgb(253 252 250 / 0.08);
+}
+[data-theme="light"] code,
+[data-theme="light"] .code {
+  background: rgb(8 14 35 / 0.06);
+}
+
+/* Thin accent rule — 2px, --rule-coloured (yellow by default) */
+.rule-accent {
+  display: block;
+  height: 2px;
+  width: 4rem;
+  background: var(--rule);
+  border: 0;
+  margin: var(--sp-1-5) 0;
+}
+
+/* Hairline — subtle divider matching --rule-muted */
+hr.hairline, .hairline-rule {
+  border: 0;
+  border-top: 1px solid var(--rule-muted);
+  margin: 0;
+}

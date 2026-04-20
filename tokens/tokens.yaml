@@ -236,75 +236,24 @@ border_width:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # GRADIENTS — the brand leans on gradients more than solid accents.
-#
-# Rendering policy: all gradients MUST be smooth. In sRGB, two desaturated
-# neutrals interpolated linearly show visible contouring (see the card_sky
-# tint across a tall section). Each gradient is therefore published in two
-# forms:
-#
-#   gradient.<name>.oklab   — native CSS with `in oklab` interpolation.
-#                             Preferred for modern browsers (Chrome 111+,
-#                             Safari 16.2+, Firefox 113+).
-#   gradient.<name>.srgb    — sRGB with a perceptually-placed midpoint
-#                             (computed by converting endpoints to OKLAB,
-#                             averaging, and converting back). Use for
-#                             email, PPTX, and other renderers that don't
-#                             understand `in oklab`.
-#   gradient.<name>.stops   — structured breakdown (for programmatic use).
 # ─────────────────────────────────────────────────────────────────────────────
 gradient:
   # Fund-theme hero backgrounds (vertical, 180deg)
-  forge:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #080E23, #4C3D32)"
-    srgb:  "linear-gradient(180deg, #080E23 0%, #28252C 50%, #4C3D32 100%)"
-    stops: [{ pos: "0%", hex: "#080E23" }, { pos: "50%", hex: "#28252C" }, { pos: "100%", hex: "#4C3D32" }]
-  growth:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #1E3239, #02393C)"
-    srgb:  "linear-gradient(180deg, #1E3239 0%, #14363A 50%, #02393C 100%)"
-    stops: [{ pos: "0%", hex: "#1E3239" }, { pos: "50%", hex: "#14363A" }, { pos: "100%", hex: "#02393C" }]
-  warmth:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #1C0E1D, #3A1717)"
-    srgb:  "linear-gradient(180deg, #1C0E1D 0%, #2B131B 50%, #3A1717 100%)"
-    stops: [{ pos: "0%", hex: "#1C0E1D" }, { pos: "50%", hex: "#2B131B" }, { pos: "100%", hex: "#3A1717" }]
+  forge:   "linear-gradient(180deg, #080E23, #4C3D32)"
+  growth:  "linear-gradient(180deg, #1E3239, #02393C)"
+  warmth:  "linear-gradient(180deg, #1C0E1D, #3A1717)"
 
-  # Card tints (vertical, light) — most band-prone; midpoint matters most here.
-  card_sand:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #D6D5BF, #F8F7F5)"
-    srgb:  "linear-gradient(180deg, #D6D5BF 0%, #E7E6DA 50%, #F8F7F5 100%)"
-    stops: [{ pos: "0%", hex: "#D6D5BF" }, { pos: "50%", hex: "#E7E6DA" }, { pos: "100%", hex: "#F8F7F5" }]
-  card_sky:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #C9D7D7, #F4ECE5)"
-    srgb:  "linear-gradient(180deg, #C9D7D7 0%, #DFE2DE 50%, #F4ECE5 100%)"
-    stops: [{ pos: "0%", hex: "#C9D7D7" }, { pos: "50%", hex: "#DFE2DE" }, { pos: "100%", hex: "#F4ECE5" }]
-  card_cream:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #EAE9DD, #FDFCFA)"
-    srgb:  "linear-gradient(180deg, #EAE9DD 0%, #F3F2EB 50%, #FDFCFA 100%)"
-    stops: [{ pos: "0%", hex: "#EAE9DD" }, { pos: "50%", hex: "#F3F2EB" }, { pos: "100%", hex: "#FDFCFA" }]
-  card_sage:
-    direction: "180deg"
-    oklab: "linear-gradient(in oklab 180deg, #B8C6C6, #F8F7F5)"
-    srgb:  "linear-gradient(180deg, #B8C6C6 0%, #D8DEDD 50%, #F8F7F5 100%)"
-    stops: [{ pos: "0%", hex: "#B8C6C6" }, { pos: "50%", hex: "#D8DEDD" }, { pos: "100%", hex: "#F8F7F5" }]
+  # Card tints (vertical, light)
+  card_sand:  "linear-gradient(180deg, #D6D5BF, #F8F7F5)"
+  card_sky:   "linear-gradient(180deg, #C9D7D7, #F4ECE5)"
+  card_cream: "linear-gradient(180deg, #EAE9DD, #FDFCFA)"
+  card_sage:  "linear-gradient(180deg, #B8C6C6, #F8F7F5)"
 
-  # Button on dark theme — primary CTA treatment (horizontal, offset 15%→100%)
-  button_dark:
-    direction: "to right"
-    oklab: "linear-gradient(in oklab to right, #FDFCFA 15%, #D6D5BF 100%)"
-    srgb:  "linear-gradient(to right, #FDFCFA 15%, #E9E8DC 57%, #D6D5BF 100%)"
-    stops: [{ pos: "15%", hex: "#FDFCFA" }, { pos: "57%", hex: "#E9E8DC" }, { pos: "100%", hex: "#D6D5BF" }]
+  # Button on dark theme — primary CTA treatment
+  button_dark: "linear-gradient(to right, #FDFCFA 15%, #D6D5BF 100%)"
 
-  # Horizontal fade to transparent (e.g. dark-to-transparent over imagery)
-  dark_fade_right:
-    direction: "90deg"
-    oklab: "linear-gradient(in oklab 90deg, #080E23, #080E231A 65%)"
-    srgb:  "linear-gradient(90deg, #080E23 0%, #080E238C 33%, #080E231A 65%)"
-    stops: [{ pos: "0%", hex: "#080E23" }, { pos: "33%", hex: "#080E238C" }, { pos: "65%", hex: "#080E231A" }]
+  # Horizontal fade (e.g. dark-to-transparent)
+  dark_fade_right: "linear-gradient(90deg, #080E23, #080E231A 65%)"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # LOGO

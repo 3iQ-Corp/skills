@@ -118,34 +118,7 @@
 
     "gradient": {
       "type": "object",
-      "properties": {
-        "_doc": { "type": "string" }
-      },
-      "additionalProperties": {
-        "oneOf": [
-          { "$ref": "#/$defs/gradient" },
-          {
-            "type": "object",
-            "required": ["oklab", "srgb"],
-            "properties": {
-              "direction": { "type": "string" },
-              "oklab":     { "$ref": "#/$defs/gradient" },
-              "srgb":      { "$ref": "#/$defs/gradient" },
-              "stops": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["pos", "hex"],
-                  "properties": {
-                    "pos": { "type": "string", "pattern": "^-?\\d+(\\.\\d+)?%$" },
-                    "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6,8}$" }
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
+      "additionalProperties": { "$ref": "#/$defs/gradient" }
     },
 
     "logo": {

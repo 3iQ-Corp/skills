@@ -113,43 +113,17 @@
   --pad-h-main:    5rem;
 
   /* ─── GRADIENTS ───────────────────────────────────────────────────── */
-  /* Every gradient includes a perceptually-even midpoint so the sRGB
-     fallback (used in older renderers: email, PPTX, Playwright <=2023)
-     already reads smoother than a straight two-stop gradient. Browsers
-     that support `in oklab` get an even cleaner ramp via the override
-     block further down. Midpoints were computed by converting both
-     endpoints to OKLAB, averaging, and converting back to sRGB. */
-  --gradient-forge:   linear-gradient(180deg, #080E23 0%, #28252C 50%, #4C3D32 100%);
-  --gradient-growth:  linear-gradient(180deg, #1E3239 0%, #14363A 50%, #02393C 100%);
-  --gradient-warmth:  linear-gradient(180deg, #1C0E1D 0%, #2B131B 50%, #3A1717 100%);
+  --gradient-forge:   linear-gradient(180deg, #080E23, #4C3D32);
+  --gradient-growth:  linear-gradient(180deg, #1E3239, #02393C);
+  --gradient-warmth:  linear-gradient(180deg, #1C0E1D, #3A1717);
 
-  --gradient-card-sand:  linear-gradient(180deg, #D6D5BF 0%, #E7E6DA 50%, #F8F7F5 100%);
-  --gradient-card-sky:   linear-gradient(180deg, #C9D7D7 0%, #DFE2DE 50%, #F4ECE5 100%);
-  --gradient-card-cream: linear-gradient(180deg, #EAE9DD 0%, #F3F2EB 50%, #FDFCFA 100%);
-  --gradient-card-sage:  linear-gradient(180deg, #B8C6C6 0%, #D8DEDD 50%, #F8F7F5 100%);
+  --gradient-card-sand:  linear-gradient(180deg, #D6D5BF, #F8F7F5);
+  --gradient-card-sky:   linear-gradient(180deg, #C9D7D7, #F4ECE5);
+  --gradient-card-cream: linear-gradient(180deg, #EAE9DD, #FDFCFA);
+  --gradient-card-sage:  linear-gradient(180deg, #B8C6C6, #F8F7F5);
 
-  --gradient-button-dark:    linear-gradient(to right, #FDFCFA 15%, #E9E8DC 57%, #D6D5BF 100%);
-  --gradient-dark-fade-right: linear-gradient(90deg, #080E23 0%, #080E238C 33%, #080E231A 65%);
-}
-
-/* Perceptual OKLAB interpolation for browsers that support it
-   (Chrome 111+, Safari 16.2+, Firefox 113+). These override the sRGB
-   fallbacks above. Same endpoints, no hand-picked midpoint — the
-   browser interpolates perceptually across OKLAB. */
-@supports (background: linear-gradient(in oklab, red, blue)) {
-  :root {
-    --gradient-forge:   linear-gradient(in oklab 180deg, #080E23, #4C3D32);
-    --gradient-growth:  linear-gradient(in oklab 180deg, #1E3239, #02393C);
-    --gradient-warmth:  linear-gradient(in oklab 180deg, #1C0E1D, #3A1717);
-
-    --gradient-card-sand:  linear-gradient(in oklab 180deg, #D6D5BF, #F8F7F5);
-    --gradient-card-sky:   linear-gradient(in oklab 180deg, #C9D7D7, #F4ECE5);
-    --gradient-card-cream: linear-gradient(in oklab 180deg, #EAE9DD, #FDFCFA);
-    --gradient-card-sage:  linear-gradient(in oklab 180deg, #B8C6C6, #F8F7F5);
-
-    --gradient-button-dark:    linear-gradient(in oklab to right, #FDFCFA 15%, #D6D5BF 100%);
-    --gradient-dark-fade-right: linear-gradient(in oklab 90deg, #080E23, #080E231A 65%);
-  }
+  --gradient-button-dark: linear-gradient(to right, #FDFCFA 15%, #D6D5BF 100%);
+  --gradient-dark-fade-right: linear-gradient(90deg, #080E23, #080E231A 65%);
 }
 
 /* ─── SEMANTIC ROLES — default (dark) theme ─────────────────────────── */

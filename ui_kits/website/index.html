@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3iQ — Website UI Kit</title>
+<link rel="icon" href="../../assets/3iq_favicon.png">
+<link rel="stylesheet" href="../../tokens/tokens.css">
+<style>
+  @font-face{font-family:"Denton";src:url("../../fonts/Denton-Light.woff2") format("woff2");font-weight:300;font-display:swap}
+  @font-face{font-family:"Neue Haas Grotesk Display";src:url("../../fonts/NeueHaasDisplay-Light.woff2") format("woff2");font-weight:300;font-display:swap}
+  @font-face{font-family:"Neue Haas Grotesk Display";src:url("../../fonts/NeueHaasDisplay-Roman.woff2") format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"Neue Haas Grotesk Display";src:url("../../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");font-weight:500 700;font-display:swap}
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font-primary);
+    font-weight:500;
+    background:var(--swatch-dark);
+    color:var(--swatch-light);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  .container{max-width:96rem;margin:0 auto;padding:0 var(--sp-5)}
+  .serif{font-family:var(--font-secondary);font-weight:300;letter-spacing:0.01em}
+  .sans{font-family:var(--font-primary)}
+  .eyebrow{font-family:var(--font-primary);font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:var(--accent);margin:0}
+  .rule{height:2px;width:4rem;background:var(--rule);border:0;margin:var(--sp-1-5) 0}
+  .btn{display:inline-flex;align-items:center;gap:var(--sp-1);padding:var(--sp-1) var(--sp-2);border-radius:var(--radius-round);font-family:var(--font-primary);font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:0;transition:opacity .25s cubic-bezier(.2,.8,.2,1)}
+  .btn:hover{opacity:.75}
+  .btn-primary-dark{background:var(--gradient-button-dark);color:var(--swatch-dark)}
+  .btn-ghost-dark{background:transparent;color:var(--swatch-light);border:1px solid rgba(253,252,250,.5)}
+  .btn-primary-light{background:var(--swatch-brand);color:var(--swatch-dark)}
+  .btn-ghost-light{background:transparent;color:var(--swatch-dark);border:1px solid var(--swatch-dark)}
+  .arrow{width:14px;height:14px}
+  .link-arrow{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-weight:600;font-size:14px;border-bottom:1px solid currentColor;padding-bottom:3px;transition:opacity .25s}
+  .link-arrow:hover{opacity:.75}
+  .hairline{border:0;border-top:1px solid var(--rule-muted);margin:0}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="Icons.jsx"></script>
+<script type="text/babel" src="Nav.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="FeatureGrid.jsx"></script>
+<script type="text/babel" src="Solutions.jsx"></script>
+<script type="text/babel" src="Editorial.jsx"></script>
+<script type="text/babel" src="CTA.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" src="App.jsx"></script>
+
+</body>
+</html>

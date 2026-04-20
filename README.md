@@ -1,131 +1,233 @@
 # 3iQ Design System
 
-Single source of truth for 3iQ's brand: colors, typography, spacing, logos,
-fonts, gradients, voice, and product taxonomy. Designed to be consumed by
-**LLMs and rendering scripts** to produce on-brand marketing content,
-slides, emails, and web pages.
+Single source of truth for **3iQ Corp's** brand — colors, typography, spacing, gradients, logos, fonts, voice, and the visual language of [3iq.io](https://3iq.io). Built for both designers and LLM-driven rendering so we can produce on-brand marketing content, slides, product pages, and decks without re-inventing brand decisions each time.
 
-All tokens are derived from the live [3iq.io](https://3iq.io) Webflow
-stylesheet (verified April 2026).
+> **Tagline:** *Forging new paths in alternative investing.*
 
-## Quick reference
+3iQ is a Toronto-based digital asset manager (founded 2012, now part of Monex/Coincheck Group) that pioneers institutional-grade digital asset investment products — ETFs, CEFs, and multi-crypto vehicles for forward-thinking institutional allocators. The brand is confident, precise, and institutional. It treats digital assets as a legitimate asset class — no crypto-native slang, no hype, no emojis in marketing copy.
 
-| Token | Value | Notes |
-|---|---|---|
-| `dark` (bg) | `#080E23` | Default background |
-| `dark_secondary` | `#4C3D32` | Forge gradient bottom |
-| `light` (text on dark) | `#FDFCFA` | |
-| `brand` (sand) | `#D6D5BF` | Primary brand fill on light |
-| `yellow` (aka gold) | `#EDC576` | Eyebrow / accent |
-| `green` | `#4C9478` | CEF / positive |
-| `orange` | `#E6704E` | Multi-crypto / warmth |
-| Heading font | Denton Light (300) | Serif; fallback Georgia / Times New Roman |
-| Body font | Neue Haas Grotesk Display Medium (500) | Sans; fallback Inter / Arial |
+---
 
-**Default theme is dark.** The brand leans heavily on **gradients** for
-surfaces — see `tokens.gradient.forge` / `growth` / `warmth`.
+## Sources
 
-## Structure
+All tokens, fonts, and structure in this project are derived from:
 
-```
-design-system/
-├── AGENTS.md                ← READ FIRST if you are an LLM
-├── CHANGELOG.md
-├── tokens/
-│   ├── tokens.yaml          ← human-readable source of truth
-│   ├── tokens.json          ← machine-readable (same data)
-│   ├── tokens.schema.json   ← JSON Schema for tokens.json
-│   └── tokens.css           ← CSS custom properties
-├── reference/
-│   ├── README.md
-│   ├── gradients.md         ← when to use Forge vs Growth vs Warmth
-│   └── typography/          ← live HTML specimens (see below)
-├── scripts/
-│   └── check-tokens.sh      ← sanity check that .yaml/.json/.css agree
-└── assets/
-    ├── logos/3iq_logo.svg
-    └── fonts/               ← placeholders until licensed fonts added
-        ├── DentonVariableTest-VF.otf
-        └── FunnelSans-VariableFont_wght.ttf
-```
+- **GitHub repo** — [`3iQ-Corp/design-system`](https://github.com/3iQ-Corp/design-system) (main branch) — the canonical token set (`tokens/tokens.{yaml,json,css}`), gradient reference, typography specimens, logo SVG, and AGENTS.md rules for LLM consumers. Verified April 2026.
+- **Live site** — [3iq.io](https://3iq.io) — Webflow stylesheet was the upstream source for every color/type/spacing value. Favicon + webclip + the real licensed Denton-Light and Neue Haas Grotesk Display webfonts were pulled from the Webflow CDN (`cdn.prod.website-files.com`).
 
-## Specimens
+Nothing in this project is invented. If you find a decision that doesn't trace back to one of those two sources, flag it — it's a bug.
 
-Open [`reference/typography/index.html`](./reference/typography/index.html)
-to view rendered examples of the type scale and brand layouts on both
-dark and light backgrounds. Every value is pulled from `tokens/tokens.css`
-— no local brand decisions. Useful as a design QA surface and as a
-reference artefact when briefing humans or other tools.
+---
 
-## Consuming from another project
+## Index
 
-### Via the `3iq-brand` OpenCode skill (recommended for ad-hoc work)
+Start here:
 
-A companion skill lives in this repo at [`skills/3iq-brand/SKILL.md`](./skills/3iq-brand/SKILL.md).
-It inlines the critical tokens (palette, fallback fonts, gradients, voice
-rules) and auto-loads whenever you ask an LLM to produce 3iQ-branded
-output — slides, docs, emails, web pages — regardless of which repo
-you're in. It points back here (`AGENTS.md`, `tokens/`) for anything
-deeper.
+| File | What it is |
+|---|---|
+| `README.md` | This file — brand overview, content + visual + iconography fundamentals |
+| `SKILL.md` | Agent-Skills-compatible entry-point for agents |
+| `colors_and_type.css` | Drop-in semantic CSS: `.h1 / .p / .eyebrow / --fg1 / --bg1 / --accent-yellow`. Re-exports `tokens/tokens.css`. |
+| `tokens/tokens.yaml` | Human-readable source of truth for all tokens |
+| `tokens/tokens.json` | Machine-readable mirror (for Python, python-pptx, Jinja) |
+| `tokens/tokens.css` | CSS custom properties — `var(--bg)`, `var(--text)`, `var(--gradient-forge)` |
+| `reference/gradients.md` | When to use Forge vs Growth vs Warmth |
+| `reference/typography/` | Live HTML specimens (dark, light, editorial, numbered-grid, feature-cards, forge-hero) |
+| `fonts/` | Real licensed `.woff2` (Denton-Light + Neue Haas Grotesk Display 300/400/500) + variable-font placeholders |
+| `assets/logos/3iq_logo.svg` | Primary logo (currentColor fill) |
+| `assets/3iq_favicon.png`, `assets/3iq_webclip.png` | Favicons |
+| `preview/` | Small HTML cards that populate the Design System tab |
+| `ui_kits/website/` | Pixel-faithful recreation of the 3iq.io marketing site, componentised |
+| `ui_kits/product/` | Fund product-page UI kit (ticker table, fund hero, fund detail) |
 
-For OpenCode to discover it, symlink it into your skills directory once:
+---
 
-```bash
-ln -s "$(pwd)/skills/3iq-brand" ~/.config/opencode/skills/3iq-brand
-```
+## Content fundamentals
 
-The skill is a thin, inlined snapshot of the tokens above. **This repo is
-the canonical source of truth.** When brand decisions change, update the
-tokens first, then update `skills/3iq-brand/SKILL.md` to match. Because
-the skill is symlinked (not copied), edits land in both places at once.
+### Voice
+Confident, precise, institutional. Measured language — *pioneering, forging, institutional-grade, regulated*. Treats digital assets as a legitimate asset class for traditional allocators. No hype, no hedging either — state the fact and let it stand.
 
-### Python
-```python
-import json, pathlib
-tokens = json.loads(pathlib.Path("../design-system/tokens/tokens.json").read_text())
+### Tone
+Third-person or neutral first-person-plural ("we"). Speaks TO institutional investors, allocators, advisors — not retail. Never condescending.
 
-bg       = tokens["color"]["role"]["dark"]["bg"]          # "#080E23"
-accent   = tokens["color"]["role"]["dark"]["accent"]      # "#EDC576"
-forge    = tokens["gradient"]["forge"]["srgb"]             # sRGB fallback w/ eased midpoint
-#        = tokens["gradient"]["forge"]["oklab"]            # modern CSS (in oklab)
-#        = tokens["gradient"]["forge"]["stops"]            # structured stops
-headline = tokens["typography"]["secondary"]["family"]    # Denton, ...
-```
+### Casing
+- **Headlines:** Sentence case (`Forging new paths in alternative investing`). Never all-caps except for eyebrows and tickers.
+- **Eyebrows / UI labels / ticker badges:** `UPPERCASE` with `0.04em` letter-spacing.
+- **Body, buttons:** Sentence case.
+- **Product names:** Title Case (*3iQ Bitcoin ETF*, *3iQ Solana Staking ETF*).
 
-### HTML / CSS
+### Lead with the fact
+> *"2020: North America's first major exchange-listed Bitcoin and Ether Funds."*
+
+Not "We're proud to have launched…". The milestone comes first; framing follows if at all.
+
+### "Digital assets," not "crypto"
+In institutional contexts use **digital assets** / **digital asset investing**. "Crypto" is acceptable in casual body copy and product-feature lists (e.g. *multi-crypto fund*), never in the headline or hero.
+
+### Numbers + units
+Always pair numbers with their unit: `USD 200M`, `4.25% yield`, `bps` for spreads, `AUM` on scale. Prefer explicit regulatory jurisdictions: *"regulated in Canada by the OSC"*, *"listed on Nasdaq Dubai"*.
+
+### Cite firsts
+Firsts and regulatory milestones are the brand's central marketing asset. Lead with them when they apply:
+
+- 2017: First regulated Digital Asset Investment Fund Manager in Canada
+- 2020: North America's first major exchange-listed Bitcoin and Ether Funds
+- 2021: Middle East's first exchange-listed Bitcoin-based fund on Nasdaq Dubai
+- 2023: World's first ETH staking ETF
+- 2025: Among the first Solana Staking ETFs and XRP ETFs
+- 2026: First Canadian commercial-bank-backed actively managed ETF
+
+### Do
+- Lead with the milestone or fact; context follows.
+- Name specific regulators, exchanges, instruments.
+- Use numbers with units.
+- Use signature phrases: *"Forging new paths in alternative investing"*, *"Institutional-grade digital asset investments"*, *"Pioneering digital asset investment management since 2012"*.
+- Include `tokens.disclaimer.standard` on anything that looks like marketing.
+
+### Don't
+- **No emojis** in marketing copy. Ever.
+- **No crypto-native slang** (HODL, WAGMI, ape, moon, diamond hands).
+- **No exclamation marks.**
+- **No hype adjectives** — *revolutionary, game-changing, disruptive, insane, epic*.
+- **No all-caps headlines** — eyebrows only.
+- **No "we're excited to announce"** openers. Announcement? Lead with what launched.
+
+### Example contrast
+
+| ❌ Off-brand | ✅ On-brand |
+|---|---|
+| "We're thrilled to launch our insanely innovative ETH staking ETF!! 🚀" | "3iQ launches the world's first ETH staking ETF." |
+| "Crypto for everyone" | "Institutional-grade digital asset investments." |
+| "Join the digital asset revolution" | "Pioneering digital asset investment management since 2012." |
+
+---
+
+## Visual foundations
+
+### Palette — muted warm neutrals over dark
+The brand is **NOT** "navy + gold + green". It's a **muted warm-neutral** palette (sand, sky, cream, sage) sitting on dark gradients, with yellow / green / orange used sparingly as accents.
+
+- **Dark `#080E23`** — default background. Deep navy, almost black.
+- **Dark Secondary `#4C3D32`** — warm brown, lives only at the bottom of the Forge gradient.
+- **Light `#FDFCFA`** — warm off-white text on dark, page background on light.
+- **Brand palette** — sand `#D6D5BF`, sky `#C9D7D7`, cream `#EAE9DD`, sage `#B8C6C6`. These are the primary visual identity.
+- **Accents** — yellow `#EDC576` (ETF/corporate), green `#4C9478` (CEF/positive), orange `#E6704E` (multi-crypto/warmth).
+
+### Gradients do the heavy lifting
+The brand leans on gradients more than flat colour for hero surfaces. Three named hero gradients, each tied to a product family:
+
+- **Forge** (`#080E23 → #4C3D32`) — navy→warm brown. Yellow accent. ETF / corporate / default.
+- **Growth** (`#1E3239 → #02393C`) — deep slate→deep teal. Green accent. CEFs, yield.
+- **Warmth** (`#1C0E1D → #3A1717`) — plum-black→oxblood. Orange accent. Multi-crypto, thematic.
+
+Apply with `data-fund-theme="etf|cef|multi-crypto"` on a wrapper; the CSS tokens swap gradient + accent + rule in one step.
+
+For cards on light backgrounds: four light top-to-bottom fades — `card_sand`, `card_sky`, `card_cream`, `card_sage` — for subtle variation across a grid without reaching for the hero gradients.
+
+### Typography
+- **Display / H1–H5:** Denton Light (300). Serif. Tight leading (`1em`–`1.1em`), `0.01em` letter-spacing. Sentence case.
+- **H6, body, UI, buttons, eyebrows:** Neue Haas Grotesk Display. Sans. Site's default body weight is **500 (Medium)**, not 400 — match that.
+- **Scale (desktop):** display `7rem` · h1 `5rem` · h2 `4rem` · h3 `3rem` · h4 `2.5rem` · h5 `2rem` · h6 `1.5rem` · body `1rem` · small `0.875rem`.
+- **Line-height:** tight `1em` (display/h1/h2) · snug `1.1em` (h3/h4/h5) · normal `1.25em` (h6, lg, sm) · relaxed `1.5em` (body).
+- **Letter-spacing:** `0` body · `0.01em` headings · `0.04em` eyebrows + tickers.
+
+### Backgrounds & imagery
+- **Full-bleed gradients** are the default for hero/section backgrounds.
+- **Light card tints** for grids of cards on bright sections.
+- **Full-bleed photography** is warm, institutional, architectural — never stock-crypto imagery (no glowing orbs, no hoodie hackers, no rocket ships). Imagery skews cool/cinematic with warm highlights. Subtle grain is acceptable; heavy filters aren't.
+- **No repeating textures or illustration patterns.** Gradients are the texture.
+
+### Spacing & layout
+- Rem-based scale: `0.125`, `0.25`, `0.5`, `0.75`, `1`, `1.25`, `1.5`, `2`, `2.5`, `3`, `3.5`, `4`, `5`, `6`, `7`, `8`, `10`, `12`, `15`.
+- Section vertical padding: `x_small 2.5rem · small 5rem · main 7rem · large 10rem · x_large 15rem`.
+- Section horizontal: `small 2.5rem · main 5rem`.
+- Content max-width: `96rem` (1536px) container.
+- Prose max-width: `60ch` (body), `50ch` (lede), `14ch` (display headlines — long lines are never allowed to break the elegance).
+- Grids: 2-col and 2×2 are the dominant compositions. 5-col numbered grids for feature lists with `01–05` numerals.
+
+### Cards
+- **Radius:** `1rem` (`--radius-main`). No heavy rounding; never pill-shaped cards.
+- **Fill:** white (`#FDFCFA`) or a card tint gradient.
+- **Shadow:** almost none — `0 1px 0 rgba(8, 14, 35, 0.04)`. Cards sit on tonal background, not on neutral grey with drop-shadow drama.
+- **Border:** hairline `rgb(8 14 35 / 0.12)` between list rows inside a card; cards themselves usually have no border.
+- **Padding:** `2rem`–`2.5rem` (`--sp-4`/`--sp-5`). Generous.
+
+### Borders & rules
+- Only two widths: `1px` and `2px`.
+- **Hairline rules** (`--rule-muted`, 25% opacity) divide sections and list rows.
+- **Accent rules** (`--rule`, 2px, themed colour) are short — 4rem — and sit under eyebrows or between hero content blocks.
+- The tone is **typographic and editorial**, not boxed.
+
+### Buttons
+- **Shape:** fully-rounded pill (`border-radius: 100vw`).
+- **Dark theme primary CTA:** horizontal gradient `button_dark` — light→sand, `linear-gradient(to right, #FDFCFA 15%, #D6D5BF 100%)`, dark text. On hover opacity drops to 75%.
+- **Light theme primary CTA:** solid sand `#D6D5BF` fill, dark text.
+- **Secondary:** transparent fill, 1px current-color border, matches text color.
+- **Icon:** a small top-right arrow (`↗`) inside the button — never a chevron, never a plain right-arrow.
+
+### Hover / press states
+- **Links + buttons hover:** opacity drops to ~75% (not a colour change).
+- **Press:** further opacity step to ~60%; no scale/shrink transforms.
+- **Card hover:** subtle `translateY(-2px)` or a small hairline-colour shift; no heavy shadows.
+
+### Animation
+- **Easing:** `cubic-bezier(0.2, 0.8, 0.2, 1)` (standard Webflow "ease-out-quart" feel). Calm, not bouncy.
+- **Duration:** 200–400ms for UI, 600–900ms for hero fades on first view.
+- **Fades over scale.** Parallax is acceptable in hero sections; bounce is not.
+- **No page-load stagger animations** on marketing body copy — too hype-y for the tone.
+
+### Transparency & blur
+- `rgb(253 252 250 / 0.25)` (light @ 25%) for hairlines on dark.
+- `rgb(8 14 35 / 0.25)` (dark @ 25%) for hairlines on light.
+- Backdrop-blur used sparingly on sticky nav over hero gradients. Not used as a decorative effect.
+
+### Corner radii
+- `x_small 0.25rem` — input fields, small swatches.
+- `small 0.375rem` — internal chips/badges.
+- `main 1rem` — cards, images, media.
+- `round 100vw` — buttons, avatars, pills.
+
+### Layout rules
+- Sticky top nav on marketing pages; otherwise fixed elements are rare.
+- Long-form hero headlines break at meaningful phrase endings (`max-width: 14ch` and careful line breaks).
+- Right-aligned CTA buttons are common at the end of sections.
+- A section nearly always has: eyebrow (accent, uppercase) → display headline (Denton light, sentence case) → 1–2 paragraph lede (sans medium) → content grid → right-aligned CTA.
+
+---
+
+## Iconography
+
+The brand has **no proprietary icon set** yet. 3iQ's AGENTS.md explicitly declares icons out-of-scope — the Forge-hero specimen uses **dot-and-line constellation-style motifs** as stand-ins, not final brand icons.
+
+### Our approach
+- **No emoji** anywhere. Not in marketing, UI, or even internal docs.
+- **No unicode glyphs** as icons — arrows, checks, etc. are always SVG.
+- **SVG only**, 1.5px stroke, square line-caps. Uses `currentColor` so the icon inherits from CSS `color`.
+- **Yellow accent for a single element** inside the icon (echoing the Forge-hero stand-ins) — a single highlighted dot or shape, never more.
+
+### Default icon set
+Until an owned set exists, we use **Lucide** via CDN (`https://unpkg.com/lucide@latest`). It matches the brand's stroke weight and geometric feel better than Heroicons. Listed as a substitution — flag to the client.
+
 ```html
-<link rel="stylesheet" href="../design-system/tokens/tokens.css">
-<div data-theme="dark" data-fund-theme="etf"
-     style="background: var(--bg-gradient); color: var(--text);">
-  <span style="color: var(--accent); font: var(--fs-text-small)/var(--lh-normal) var(--font-primary);
-               letter-spacing: var(--ls-wide); text-transform: uppercase;">
-    Eyebrow
-  </span>
-  <h1 style="font: var(--fw-light) var(--fs-h1)/var(--lh-tight) var(--font-secondary);
-             letter-spacing: var(--ls-heading);">
-    Forging new paths
-  </h1>
-</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<i data-lucide="arrow-up-right"></i>
 ```
 
-### As a git submodule
-```bash
-git submodule add https://github.com/3iQ-Corp/design-system.git design-system
-```
+### In-repo icons
+- `assets/logos/3iq_logo.svg` — primary wordmark, `currentColor` fill.
+- `assets/3iq_favicon.png`, `assets/3iq_webclip.png` — application icons.
 
-## Updating tokens
+### Rules
+- **Stroke weight:** `1.5px`. Strokes, not fills.
+- **Size:** `16px` / `20px` / `24px` / `80px` (hero feature motifs). Always a rem grid multiple.
+- **Color:** inherits from text (`currentColor`). Single accent element allowed in the accent colour (`var(--accent)`).
+- **Clearspace for logo:** height of the "Q". Minimum logo width `80px`.
+- **Never recolor the logo.** Use it on dark or light by setting CSS `color`, never by filling child paths.
 
-1. Edit `tokens/tokens.yaml` (the readable source).
-2. Mirror the change in `tokens/tokens.json` and `tokens/tokens.css`.
-3. Commit with a message describing the **brand decision**, not just the diff.
+---
 
-Keep `.yaml`, `.json`, and `.css` in sync. They're duplicated on purpose so
-consumers can pick the easiest format for their runtime.
+## Substitutions flagged
 
-## Known limitations
-
-- **Font files in `assets/fonts/` are placeholders.** Denton-Light and
-  Neue Haas Grotesk Display are licensed; the real files should be
-  obtained from the brand team and dropped in to replace the current
-  stand-ins.
-- No chart palette, icon set, or motion tokens yet — add when needed.
+- **Fonts:** both the real Denton-Light and Neue Haas Grotesk Display (`.woff2`) were pulled from the live Webflow CDN and are committed to `/fonts/`. The variable-font placeholders (`DentonVariableTest-VF.otf`, `FunnelSans-VariableFont_wght.ttf`) referenced in the upstream repo are **also** in `/fonts/` but are not used by default. Confirm licensing before distributing the `.woff2` with externally-shared artefacts.
+- **Icons:** Lucide CDN is a substitution until 3iQ commissions its own set. Flagged.
+- **Neue Haas 600/700:** the site loads only 300/400/500. We map 600/700 → Medium (500) so "semibold" feature titles still render. Not a license issue, but letterforms at 600+ will look a touch lighter than a proper Semibold cut.

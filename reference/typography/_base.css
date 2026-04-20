@@ -3,22 +3,44 @@
    - Applies body reset using tokens only.
    Imported by _specimen.css and _layouts.css. */
 
-/* Local placeholder fonts — see AGENTS.md. These are NOT the licensed
-   Denton-Light / Neue Haas Grotesk Display files. */
+/* Real licensed brand fonts — pulled from the live 3iq.io Webflow CDN
+   and saved to /fonts. Repo also ships the variable-font placeholders
+   (DentonVariableTest-VF.otf, FunnelSans-VariableFont_wght.ttf) but we
+   use the true faces here. */
 @font-face {
   font-family: "Denton";
-  src: url("../../assets/fonts/DentonVariableTest-VF.otf") format("opentype-variations"),
-       url("../../assets/fonts/DentonVariableTest-VF.otf") format("opentype");
-  font-weight: 100 900;
+  src: url("../../fonts/Denton-Light.woff2") format("woff2");
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neue Haas Grotesk Display";
-  src: url("../../assets/fonts/FunnelSans-VariableFont_wght.ttf") format("truetype-variations"),
-       url("../../assets/fonts/FunnelSans-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
+  src: url("../../fonts/NeueHaasDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../../fonts/NeueHaasDisplay-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* Semi-bold used on feature titles / buttons — Medium is closest available */
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+  font-weight: 600 700;
   font-style: normal;
   font-display: swap;
 }
