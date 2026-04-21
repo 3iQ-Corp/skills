@@ -1,22 +1,67 @@
 # Installing the 3iQ brand skill
 
-The `3iq-brand` skill lives in this repo. `SKILL.md` at the root is its entry point; every path it references (`README.md`, `reference/gradients.md`, `tokens/*`, `colors_and_type.css`, `ui_kits/website/*.jsx`, `assets/`, `fonts/`, `preview/`) resolves relative to the repo root.
+Pick the path that matches your setup. The zip install works on any machine — no git, no admin, no terminal skills beyond copy-paste. Use it first; switch to the symlink install later only if you want `git pull` to update the skill automatically.
 
-The simplest install is a single symlink from your agent's skills directory to a local clone of this repo. That way every `git pull` updates the skill — no re-installs, no drift.
+---
 
-## Prerequisites
+## Option 1 — Zip install (easiest, works everywhere)
+
+Works on **Windows (including locked-down Checkpoint laptops)**, **macOS**, and **Linux**. No git, no symlinks, no admin rights.
+
+### Step 1 — Download the repo as a zip
+
+Open this URL in a browser:
+
+**https://github.com/3iQ-Corp/design-system/archive/refs/heads/main.zip**
+
+(or go to [github.com/3iQ-Corp/design-system](https://github.com/3iQ-Corp/design-system), click the green **Code** button, then **Download ZIP**.)
+
+You'll get `design-system-main.zip`.
+
+### Step 2 — Extract it
+
+Double-click the zip. You'll get a folder called `design-system-main/`.
+
+### Step 3 — Rename the folder to `3iq-brand`
+
+Rename `design-system-main` → `3iq-brand`. The folder name matters — it's what the skill is registered as.
+
+### Step 4 — Move it into your skills directory
+
+Paste the `3iq-brand` folder into:
+
+| OS | Path |
+|---|---|
+| **macOS / Linux** | `~/.config/opencode/skills/` |
+| **Windows** | `%APPDATA%\opencode\skills\` (paste that into File Explorer's address bar) |
+
+If the `skills` folder doesn't exist yet, create it.
+
+### Step 5 — Verify
+
+Open the folder. Inside `3iq-brand/` you should see `SKILL.md`, `README.md`, `colors_and_type.css`, and folders named `reference`, `tokens`, `assets`, `fonts`, `preview`, `ui_kits`. If everything's there, you're done — start a new opencode session and the skill will trigger on mentions of 3iQ.
+
+### How to update
+
+Delete the `3iq-brand` folder, redo steps 1–4. Takes a minute.
+
+### How to uninstall
+
+Delete the `3iq-brand` folder.
+
+---
+
+## Option 2 — Symlink install (auto-updates via git pull)
+
+Use this if you already have git and want the skill to update automatically whenever the design system changes. **macOS/Linux only** — Windows symlinks require Developer Mode and often don't play nicely with Checkpoint.
+
+### Prerequisites
 
 ```sh
 git clone https://github.com/3iQ-Corp/design-system.git ~/Sites/design-system
 ```
 
-Use any path you like; the examples below assume `~/Sites/design-system`.
-
----
-
-## opencode
-
-opencode discovers skills in `~/.config/opencode/skills/<skill-name>/`. Each subdirectory is a skill; the loader reads `SKILL.md` at its root.
+Any path works; the rest of this doc assumes `~/Sites/design-system`.
 
 ### Install
 
@@ -32,10 +77,8 @@ ls -la ~/.config/opencode/skills/3iq-brand
 # Should print:  3iq-brand -> /Users/you/Sites/design-system
 
 head -4 ~/.config/opencode/skills/3iq-brand/SKILL.md
-# Should print the YAML frontmatter starting with `name: 3iq-brand`
+# Should print YAML frontmatter starting with `name: 3iq-brand`
 ```
-
-Then start a new opencode session and ask it to design or write anything 3iQ-flavoured — the skill triggers on mentions of *3iQ*, *3iq.io*, *Forge/Growth/Warmth*, *Denton*, *Neue Haas*, or any 3iQ fund name.
 
 ### Update
 
@@ -51,87 +94,57 @@ No other step. The symlink always points at the current working copy.
 rm ~/.config/opencode/skills/3iq-brand
 ```
 
-This removes only the symlink, not the repo.
+Removes only the symlink, not the repo.
 
 ---
 
-## OpenWork
+## OpenWork (workspace-local install)
 
-OpenWork workspaces ship their own local skills in a `.opencode/skills/` folder at the workspace root. Two install patterns, depending on what you want:
+OpenWork workspaces ship their own skills in `.opencode/skills/` at the workspace root. Same two options as above:
 
-### Workspace-local install (recommended when the workspace *is* the design system)
+### Zip version (easiest)
 
-Inside a workspace that should have the skill available to every session in that workspace:
+Drop the renamed `3iq-brand` folder (from Option 1, step 3) into `.opencode/skills/` inside your workspace:
+
+```
+your-workspace/
+  .opencode/
+    skills/
+      3iq-brand/       ← extracted + renamed folder goes here
+        SKILL.md
+        README.md
+        …
+```
+
+Add it to the workspace's `.gitignore` so teammates don't end up with a 30MB copy per checkout:
+
+```
+.opencode/skills/3iq-brand
+```
+
+### Symlink version (macOS/Linux, with a local clone)
 
 ```sh
 cd /path/to/your/workspace
 mkdir -p .opencode/skills
 ln -s ~/Sites/design-system .opencode/skills/3iq-brand
-```
-
-Add the symlink to the workspace's `.gitignore` if teammates clone the design-system repo to different paths:
-
-```sh
 echo ".opencode/skills/3iq-brand" >> .opencode/.gitignore
 ```
 
-### When the workspace repo *is* the design system
+### When the workspace *is* the design system repo
 
-If you're working directly inside `~/Sites/design-system` as your OpenWork workspace (as in this repo), you don't need to install anything — the `SKILL.md` at the repo root is already discoverable. Just make sure the workspace's OpenWork config doesn't scope skill discovery to `.opencode/skills/` only. If it does, add the same symlink to itself:
-
-```sh
-mkdir -p .opencode/skills
-ln -s .. .opencode/skills/3iq-brand
-```
-
-### Verify
-
-```sh
-ls -la .opencode/skills/3iq-brand
-head -4 .opencode/skills/3iq-brand/SKILL.md
-```
-
-### Update
-
-```sh
-cd ~/Sites/design-system && git pull
-```
-
-### Uninstall
-
-```sh
-rm .opencode/skills/3iq-brand
-```
-
----
-
-## Windows
-
-The symlink approach works on Windows but requires Developer Mode enabled or an admin shell. From PowerShell:
-
-```powershell
-New-Item -ItemType SymbolicLink `
-  -Path "$env:APPDATA\opencode\skills\3iq-brand" `
-  -Target "$HOME\Sites\design-system"
-```
-
-If you can't use symlinks, clone the repo directly into the skills directory:
-
-```powershell
-git clone https://github.com/3iQ-Corp/design-system.git `
-  "$env:APPDATA\opencode\skills\3iq-brand"
-```
-
-Update with `git pull` inside that directory.
+If you're working directly inside `~/Sites/design-system` as an OpenWork workspace (the case for anyone maintaining the design system), nothing to install — `SKILL.md` at the root is already discoverable.
 
 ---
 
 ## Troubleshooting
 
-**Skill doesn't trigger.** Confirm the symlink resolves (`ls -la` should show the `->` arrow pointing at the repo) and that `SKILL.md` is at the root of what the link resolves to, not inside a subfolder.
+**Skill doesn't trigger.** Check that the folder is named exactly `3iq-brand` (lowercase, hyphenated) and that `SKILL.md` sits directly inside it, not inside a nested folder like `3iq-brand/design-system-main/SKILL.md`.
 
-**Reference paths 404.** The skill expects the repo's root-level layout: `reference/` (singular), `tokens/`, `assets/`, `fonts/`, `ui_kits/`, `preview/`, `colors_and_type.css`. If you see `references/` (plural) or a nested `design-system/` folder inside the skill dir, the symlink is pointing at the wrong place — recreate it pointing one level higher.
+**Reference paths 404.** The skill expects the repo's root-level layout: `reference/` (singular), `tokens/`, `assets/`, `fonts/`, `ui_kits/`, `preview/`, `colors_and_type.css`. If you see `references/` (plural) or a nested `design-system-main/` folder inside `3iq-brand/`, the extraction left an extra level — move the inner contents up one level.
 
-**Name conflicts with an existing skill.** If `~/.config/opencode/skills/3iq-brand` already exists, rename the old one first (`mv ~/.config/opencode/skills/3iq-brand ~/.config/opencode/skills/3iq-brand.bak`), create the symlink, verify, then delete the backup.
+**Windows: symlink creation fails.** Use Option 1 (zip install). Windows symlinks need Developer Mode enabled and often fail silently under Checkpoint endpoint protection; the zip install avoids the problem entirely.
 
-**Install source contains a sparse-checkout or hardlinked clone.** Some opencode distributions include a pre-populated skills clone (e.g. `~/.config/opencode/_anthropic-skills-repo/`) whose `skills/` directory is hardlinked into the public `~/.config/opencode/skills/`. If you already have a `3iq-brand` entry there, `mv` both before linking; moving one moves both.
+**Name conflicts with an existing skill.** If a `3iq-brand` folder is already there, rename the old one (e.g. to `3iq-brand-old`), install the new one, verify it works, then delete the old folder.
+
+**Hardlinked or sparse-checkout skill clones.** Some opencode distributions ship a pre-populated skills clone (e.g. `~/.config/opencode/_anthropic-skills-repo/`) whose contents are hardlinked into `~/.config/opencode/skills/`. If you see a `3iq-brand` entry you didn't create, check whether it's hardlinked into that clone before deleting — moving one copy moves both.
