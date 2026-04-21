@@ -27,6 +27,7 @@ Start here:
 |---|---|
 | `README.md` | This file — brand overview, content + visual + iconography fundamentals |
 | `SKILL.md` | Agent-Skills-compatible entry-point for agents |
+| `INSTALL.md` | Install instructions for opencode, OpenWork, and Windows |
 | `colors_and_type.css` | Drop-in semantic CSS: `.h1 / .p / .eyebrow / --fg1 / --bg1 / --accent-yellow`. Re-exports `tokens/tokens.css`. |
 | `tokens/tokens.yaml` | Human-readable source of truth for all tokens |
 | `tokens/tokens.json` | Machine-readable mirror (for Python, python-pptx, Jinja) |
