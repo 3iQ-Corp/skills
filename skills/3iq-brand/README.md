@@ -12,7 +12,7 @@ Single source of truth for **3iQ Corp's** brand — colors, typography, spacing,
 
 All tokens, fonts, and structure in this project are derived from:
 
-- **GitHub repo** — [`3iQ-Corp/design-system`](https://github.com/3iQ-Corp/design-system) (main branch) — the canonical token set (`tokens/tokens.{yaml,json,css}`), gradient reference, typography specimens, logo SVG, and AGENTS.md rules for LLM consumers. Verified April 2026.
+- **GitHub repo** — [`3iQ-Corp/skills`](https://github.com/3iQ-Corp/skills) (formerly `3iQ-Corp/design-system`, renamed April 2026; main branch) — the canonical token set (`tokens/tokens.{yaml,json,css}`), gradient reference, typography specimens, logo SVG, and AGENTS.md rules for LLM consumers. Verified April 2026.
 - **Live site** — [3iq.io](https://3iq.io) — Webflow stylesheet was the upstream source for every color/type/spacing value. Favicon + webclip + the real licensed Denton-Light and Neue Haas Grotesk Display webfonts were pulled from the Webflow CDN (`cdn.prod.website-files.com`).
 
 Nothing in this project is invented. If you find a decision that doesn't trace back to one of those two sources, flag it — it's a bug.
